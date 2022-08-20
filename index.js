@@ -23,7 +23,7 @@ app.get( '/myproject', (request, response) => {
 app.post( '/myproject', (request, response) => {
     console.log(request.body)
     
-    // response.render ('myproject')
+    response.render ('index')
 })
 
 app.get( '/contact', (request, response) => {
