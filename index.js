@@ -1,8 +1,8 @@
 // 1. express js adalah framework utk membuat web server jadi lebih cepat, sama halnya seperti bootstrap
-const { response } = require('express');
+// const { response } = require('express');
 const express = require ('express'); // 2. atau bisa juga import express from "express"
-const { request } = require('http');
-const { connected } = require('process');
+// const { request } = require('http');
+// const { connected } = require('process');
 const app = express()
 
 // 3. lalu buat port untk menjalankan si express js
@@ -10,7 +10,7 @@ const port = 9000 // 4.utk mendeklar variabel portnya berapa
 
 app.set('view engine', 'hbs') // untuk menggunakan setingan view engine template enginenya, dari npm hbs, lalu rename file html menjadi hbs
 app.use('/assets', express.static(__dirname + '/assets')) // utk node js agar mendetect path dari css di folder assets, agar bisa combine dengan file hbs
-app.use(express.urlencoded({extended: false})) // supaya tidak undefined dalam console.log, kita isikan ini, karena data masih berupa object, maka harus diisi url encodenya dalam express
+app.use(express.urlencoded({extended: true})) // supaya tidak undefined dalam console.log, kita isikan ini, karena data masih berupa object, maka harus diisi url encodenya dalam express
 
 app.get( '/', (request, response) => { //jadi ketika ada yang akses routing / ini, maka dia akan melakukan apa di anonymous functionnya, yang dimana memiliki 2 parameter, request dan response
     response.render ('index')
@@ -23,7 +23,25 @@ app.get( '/myproject', (request, response) => {
 app.post( '/myproject', (request, response) => {
     console.log(request.body)
     
-    response.render ('index')
+    let projectName = request.body.inputProject
+    let startDate = request.body.inputStartDate
+    let endDate = request.body.inputEndDate
+    let description = request.body.inputDescription
+    let technologies1 = request.body.inputTechnologiesJs
+    let technologies2 = request.body.inputTechnologiesPhp
+    let technologies3 = request.body.inputTechnologiesReact
+    let technologies4 = request.body.inputTechnologiesNodeJs
+
+    console.log(projectName);
+    console.log(startDate);
+    console.log(endDate);
+    console.log(description);
+    console.log(technologies1);
+    console.log(technologies2);
+    console.log(technologies3);
+    console.log(technologies4);
+
+    response.redirect ('/') //supaya web browser tidak loading terus"an, maka kita kasih response.render atau inner.html menuju halaman index
 })
 
 app.get( '/contact', (request, response) => {
